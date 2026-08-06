@@ -93,7 +93,7 @@ export function ClientIntakeForm() {
     control,
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid }
+    formState: { errors, isSubmitting }
   } = useForm<ClientLeadFormValues>({
     resolver: zodResolver(clientLeadSchema),
     defaultValues: defaultClientLeadValues,
@@ -125,6 +125,10 @@ export function ClientIntakeForm() {
     window.setTimeout(() => {
       router.push("/success");
     }, 1300);
+  }
+
+  function onInvalid() {
+    setServerError("Please answer every question before submitting.");
   }
 
   return (
@@ -174,7 +178,7 @@ export function ClientIntakeForm() {
           ) : (
             <motion.form
               key="form"
-              onSubmit={handleSubmit(onSubmit)}
+              onSubmit={handleSubmit(onSubmit, onInvalid)}
               className="space-y-8 px-5 py-6 sm:px-8 sm:py-8"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -279,7 +283,7 @@ export function ClientIntakeForm() {
               ) : null}
 
               <div className="border-t border-slate-200/75 pt-6">
-                <Button type="submit" size="lg" disabled={isSubmitting || !isValid} className="w-full">
+                <Button type="submit" size="lg" disabled={isSubmitting} className="w-full">
                   {isSubmitting ? (
                     <>
                       <Loader2 className="size-4 animate-spin" />
