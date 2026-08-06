@@ -8,23 +8,33 @@ type FloatingFieldProps = {
   label: string;
   error?: string;
   counter?: string;
+  index?: number;
   children: React.ReactNode;
   className?: string;
 };
 
-export function FloatingField({ id, label, error, counter, children, className }: FloatingFieldProps) {
+export function FloatingField({ id, label, error, counter, index, children, className }: FloatingFieldProps) {
   return (
-    <div className={cn("space-y-2", className)}>
-      <div className="group relative">
-        {children}
-        <label
-          htmlFor={id}
-          className="pointer-events-none absolute left-4 top-2 text-xs font-medium text-slate-500 transition-all group-focus-within:text-blue-600"
-        >
-          {label}
-        </label>
+    <div className={cn("space-y-3 rounded-lg border border-slate-200/80 bg-white/58 p-4 shadow-sm backdrop-blur", className)}>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex items-start gap-3">
+          {typeof index === "number" ? (
+            <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-md border border-slate-200 bg-white text-[11px] font-semibold text-slate-400 shadow-sm">
+              {String(index).padStart(2, "0")}
+            </span>
+          ) : null}
+          <label htmlFor={id} className="text-left text-sm font-semibold leading-6 text-slate-950">
+            {label}
+          </label>
+        </div>
+        {counter ? (
+          <span className="hidden shrink-0 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-400 sm:inline-flex">
+            {counter}
+          </span>
+        ) : null}
       </div>
-      <div className="flex min-h-5 items-start justify-between gap-3 px-1">
+      {children}
+      <div className="flex min-h-5 items-start justify-between gap-3">
         {error ? (
           <p className="flex items-center gap-1.5 text-xs font-medium text-red-600" role="alert">
             <AlertCircle className="size-3.5" />
@@ -33,7 +43,7 @@ export function FloatingField({ id, label, error, counter, children, className }
         ) : (
           <span />
         )}
-        {counter ? <p className="shrink-0 text-xs text-slate-400">{counter}</p> : null}
+        {counter ? <p className="shrink-0 text-xs text-slate-400 sm:hidden">{counter}</p> : null}
       </div>
     </div>
   );

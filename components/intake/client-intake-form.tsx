@@ -128,22 +128,22 @@ export function ClientIntakeForm() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-5xl px-4 pb-16 sm:px-6 lg:px-8">
+    <section className="mx-auto w-full max-w-4xl px-4 pb-16 pt-8 sm:px-6 sm:pt-10 lg:px-8">
       <motion.div
-        className="glass-panel overflow-hidden rounded-[28px]"
+        className="glass-panel overflow-hidden rounded-lg"
         initial={{ opacity: 0, y: 18 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="border-b border-slate-200/75 bg-white/70 px-5 py-5 sm:px-8">
+        <div className="border-b border-slate-200/75 bg-white/72 px-5 py-5 sm:px-8">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="text-sm font-semibold text-slate-950">Call intake</p>
-              <p className="mt-1 text-sm text-slate-500">Answer the questions below before the call.</p>
+              <p className="text-sm font-semibold text-slate-950">Intake Questions</p>
+              <p className="mt-1 text-sm text-slate-500">Please answer each prompt before your call.</p>
             </div>
             <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-500 shadow-sm">
               <Lock className="size-3.5 text-emerald-600" />
-              Secure submission
+              Secure
             </div>
           </div>
           <div className="mt-5 flex items-center gap-4">
@@ -169,7 +169,7 @@ export function ClientIntakeForm() {
               >
                 <Check className="size-9" />
               </motion.div>
-              <h2 className="mt-7 text-3xl font-semibold tracking-tight text-slate-950">Submission received</h2>
+              <h2 className="mt-7 text-3xl font-semibold text-slate-950">Submission received</h2>
             </motion.div>
           ) : (
             <motion.form
@@ -190,7 +190,7 @@ export function ClientIntakeForm() {
                 {...register("companyWebsite")}
               />
 
-              {questionFields.map((question) => {
+              {questionFields.map((question, index) => {
                 const value = values[question.name] ?? "";
                 return (
                   <FloatingField
@@ -199,8 +199,9 @@ export function ClientIntakeForm() {
                     label={question.label}
                     error={errors[question.name]?.message}
                     counter={`${value.length}/${question.max}`}
+                    index={index + 1}
                   >
-                    <Textarea id={question.name} placeholder={question.label} {...register(question.name)} />
+                    <Textarea id={question.name} placeholder="Write your answer here." {...register(question.name)} />
                   </FloatingField>
                 );
               })}
@@ -210,25 +211,37 @@ export function ClientIntakeForm() {
                 label="How many new clients are your systems bringing in per month?"
                 error={errors.monthlyNewClients?.message}
                 counter={`${values.monthlyNewClients?.length ?? 0}/120`}
+                index={8}
               >
                 <Input
                   id="monthlyNewClients"
                   inputMode="text"
-                  placeholder="How many new clients are your systems bringing in per month?"
+                  placeholder="Example: 3-5 per month"
                   {...register("monthlyNewClients")}
                 />
               </FloatingField>
 
-              <div className="space-y-3">
-                <div className="flex flex-col gap-1 px-1">
-                  <h2 className="text-base font-semibold text-slate-950">How ready are you to grow your business?</h2>
-                  <p className="text-sm text-slate-500">(Put on a scale of 1-5)</p>
+              <div className="space-y-3 rounded-lg border border-slate-200/80 bg-white/58 p-4 shadow-sm backdrop-blur">
+                <div className="flex items-start justify-between gap-4 px-1">
+                  <div className="flex items-start gap-3">
+                    <span className="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-[11px] font-semibold text-slate-400 shadow-sm">
+                      09
+                    </span>
+                    <div className="flex flex-col gap-1">
+                      <h2 className="text-base font-semibold text-slate-950">How ready are you to grow your business?</h2>
+                      <p className="text-sm text-slate-500">Put on a scale of 1-5.</p>
+                    </div>
+                  </div>
                 </div>
                 <Controller
                   control={control}
                   name="growthReadiness"
                   render={({ field }) => (
-                    <div className="grid grid-cols-5 gap-3" role="radiogroup" aria-label="How ready are you to grow your business?">
+                    <div
+                      className="grid grid-cols-5 gap-2.5 sm:gap-3"
+                      role="radiogroup"
+                      aria-label="How ready are you to grow your business?"
+                    >
                       {readinessScores.map((score) => {
                         const selected = field.value === score;
                         return (
@@ -237,7 +250,7 @@ export function ClientIntakeForm() {
                             type="button"
                             onClick={() => field.onChange(score)}
                             className={cn(
-                              "focus-ring flex aspect-square min-h-14 items-center justify-center rounded-2xl border text-lg font-semibold transition-all sm:min-h-16",
+                              "focus-ring flex aspect-square min-h-14 items-center justify-center rounded-lg border text-lg font-semibold transition-all sm:min-h-16",
                               selected
                                 ? "border-slate-950 bg-slate-950 text-white shadow-[0_18px_42px_rgba(15,23,42,0.18)]"
                                 : "border-slate-200 bg-white/78 text-slate-700 shadow-sm hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white"
@@ -260,7 +273,7 @@ export function ClientIntakeForm() {
               </div>
 
               {serverError ? (
-                <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700" role="alert">
+                <div className="rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700" role="alert">
                   {serverError}
                 </div>
               ) : null}
