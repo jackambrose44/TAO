@@ -6,7 +6,7 @@ export default function Home() {
     <main className="relative min-h-screen overflow-hidden">
       <div className="premium-grid pointer-events-none absolute inset-x-0 top-0 h-[520px]" />
       <section className="relative mx-auto flex w-full max-w-6xl flex-col items-center px-4 pt-10 text-center sm:px-6 sm:pt-16 lg:px-8">
-        <div className="flex flex-col items-center gap-5">
+        <div className="flex flex-col items-center">
           <Image
             src="/tao-logo.webp"
             alt="Tao Solutions"
@@ -15,9 +15,6 @@ export default function Home() {
             priority
             className="size-20 rounded-3xl shadow-[0_22px_55px_rgba(15,23,42,0.16)] ring-1 ring-slate-200 sm:size-24"
           />
-          <div className="rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-medium text-slate-600 shadow-sm backdrop-blur">
-            Tao Solutions Client Onboarding
-          </div>
         </div>
         <h1 className="mt-7 max-w-4xl text-balance text-4xl font-semibold tracking-tight text-slate-950 sm:text-6xl">
           Start the call with clarity.
