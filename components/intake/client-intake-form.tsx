@@ -69,7 +69,7 @@ const questionFields: QuestionField[] = [
   },
   {
     name: "blocker",
-    label: "What has stopped you from stopping these problems?",
+    label: "What has stopped you from solving these problems?",
     max: 700
   },
   {

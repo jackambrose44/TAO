@@ -14,7 +14,7 @@ export const clientLeadSchema = z.object({
   callGoals: longAnswer("What are you hoping we cover on the call?"),
   revenueLeak: longAnswer("Where do you think your business is leaking revenue?"),
   timeLeak: longAnswer("Where do you think your business is leaking time?"),
-  blocker: longAnswer("What has stopped you from stopping these problems?"),
+  blocker: longAnswer("What has stopped you from solving these problems?"),
   prospectingMethod: longAnswer("How do you currently prospect clients?"),
   monthlyNewClients: z
     .string()
