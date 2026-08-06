@@ -64,12 +64,12 @@ const questionFields: QuestionField[] = [
   },
   {
     name: "timeLeak",
-    label: "Where is your business leaking time?",
+    label: "Where do you think your business is leaking time?",
     max: 700
   },
   {
     name: "blocker",
-    label: "What stopped you from fixing these problems?",
+    label: "What has stopped you from stopping these problems?",
     max: 700
   },
   {

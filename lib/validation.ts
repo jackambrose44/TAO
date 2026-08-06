@@ -13,8 +13,8 @@ export const clientLeadSchema = z.object({
   bookingReason: longAnswer("What made you book a call today?"),
   callGoals: longAnswer("What are you hoping we cover on the call?"),
   revenueLeak: longAnswer("Where do you think your business is leaking revenue?"),
-  timeLeak: longAnswer("Where is your business leaking time?"),
-  blocker: longAnswer("What stopped you from fixing these problems?"),
+  timeLeak: longAnswer("Where do you think your business is leaking time?"),
+  blocker: longAnswer("What has stopped you from stopping these problems?"),
   prospectingMethod: longAnswer("How do you currently prospect clients?"),
   monthlyNewClients: z
     .string()
